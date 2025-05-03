@@ -1,6 +1,6 @@
 # Stealthy ETW Patch
 
-A proof-of-concept tool that demonstrates ETW (Event Tracing for Windows) evasion by patching the `EtwpEventWriteFull` function in memory. This technique prevents ETW from logging events by making the function return immediately.
+A proof-of-concept tool that demonstrates ETW (Event Tracing for Windows) evasion by patching the `EtwpEventWriteFull` internal function in memory. This technique prevents ETW from logging events by making the function return immediately.
 
 ## Technique Overview
 
@@ -14,22 +14,24 @@ baseAddressOfExportedFunction + i(call instruction offset) + 5(call instruction 
 4. Patching at found address with an early RET instruction (0xC3)
 
 
-###Compilation
-```bash
+## Compilation
+```Powershell
 gcc .\stealthy_etw_patch.c -o .\stealthy_etw_patch.exe -ldnsapi
 ```
 
 ## Usage
 
 Run the compiled executable with administrator privileges:
-```bash
+```Powershell
 .\stealthy_etw_patch.exe
 ```
+![example](images/example.png)
+
 
 The program also test the technique by using DnsQuery_A which can later be examined using the `Microsoft-Windows-DNS-Client` ETW provider(e.g Sysmon)
 
 ## Knowledge
 ### Main ETW functions using internal EtwpEventWriteFull function
-![alt text](images/image.png)
-![alt text](images/image-1.png)
-![alt text](images/image-2.png)
+![etweventwritetransfer](images/image.png)
+![etweventwrite](images/image-1.png)
+![xref](images/image-2.png)
