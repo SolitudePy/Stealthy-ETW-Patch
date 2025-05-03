@@ -28,7 +28,7 @@ Run the compiled executable with administrator privileges:
 ![example](images/example.png)
 
 
-The program also test the technique by using DnsQuery_A which can later be examined using the `Microsoft-Windows-DNS-Client` ETW provider(e.g Sysmon)
+The program also test the technique by using DnsQuery_A which can later be examined using the `Microsoft-Windows-DNS-Client` ETW provider (e.g Sysmon)
 
 ## Knowledge
 ### Main ETW functions using internal EtwpEventWriteFull function
